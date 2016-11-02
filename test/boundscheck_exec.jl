@@ -174,4 +174,9 @@ if bc_opt != bc_off
     @test_throws BoundsError k1(Int[])
 end
 
+# Ensure that broadcast doesn't use @inbounds when calling the function
+let A = zeros(3,3)
+    @test_throws BoundsError broadcast(getindex, A, 1:3, 1:3)
+end
+
 end
